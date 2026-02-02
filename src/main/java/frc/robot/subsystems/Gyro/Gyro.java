@@ -7,7 +7,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Gyro extends SubsystemBase {
-    public static Gyro gyro;
+    private static Gyro gyro;
 
     private final AHRS ahrs;
 
@@ -32,8 +32,7 @@ public class Gyro extends SubsystemBase {
     }
 
     public static Gyro getInstance() {
-        if (gyro == null)
-            gyro = new Gyro();
+        if (gyro == null) gyro = new Gyro();
         return gyro;
     }
 }
