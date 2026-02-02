@@ -23,6 +23,10 @@ public class Gyro extends SubsystemBase {
         return ahrs.getRate();
     }
 
+    public double getYaw() {
+        return ahrs.getYaw();
+    }
+
     public void reset() {
         ahrs.reset();
     }
