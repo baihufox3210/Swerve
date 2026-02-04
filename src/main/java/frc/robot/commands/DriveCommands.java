@@ -1,9 +1,10 @@
 package frc.robot.commands;
 
-import java.util.function.Supplier;
-
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.constants.DrivetrainConstants;
+import frc.robot.controls.DriverControls;
 import frc.robot.subsystems.Drivetrain.Drivetrain;
 
 public class DriveCommands {
@@ -11,11 +12,33 @@ public class DriveCommands {
         return drivetrain.run(drivetrain::stopWithXMode).withName("XCommand");
     }
 
-    public static Command driveCommand(Drivetrain drivetrain, Supplier<ChassisSpeeds> chassisSpeeds) {
+    public static Command defaultDrive(Drivetrain drivetrain, DriverControls controls) {
         return drivetrain.run(
             () -> {
-                drivetrain.drive(chassisSpeeds.get());
+                drivetrain.drive(
+                    getChassisSpeeds(
+                        drivetrain.getPose().getRotation(),
+                        controls
+                    )
+                );
             }
-        ).withName("DriveCommand");
+        ).withName("defaultDrive");
+    }
+
+    private static ChassisSpeeds getChassisSpeeds(Rotation2d rotation, DriverControls controls) {
+        if (controls.isFieldRelative()) {
+            return ChassisSpeeds.fromFieldRelativeSpeeds(
+                controls.getXSpeed() * DrivetrainConstants.maxSpeed,
+                controls.getYSpeed() * DrivetrainConstants.maxSpeed,
+                controls.getRotSpeed() ,
+                rotation
+            );
+        } else {
+            return new ChassisSpeeds(
+                controls.getXSpeed(),
+                controls.getYSpeed(),
+                controls.getRotSpeed()
+            );
+        }
     }
 }
