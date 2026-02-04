@@ -23,13 +23,13 @@ public class RobotContainer {
 	}
 
 	private void configureButtonBindings() {
-		controls.intakeButton().toggleOnTrue(
+		controls.intakeButton().whileTrue(
 			IntakeCommands.intakeCommand(intake)
 		);
 
-		controls.outtakeButton().toggleOnTrue(
-			IntakeCommands.outtakeCommand(intake)
-		);
+		// controls.outtakeButton().toggleOnTrue(
+		// 	IntakeCommands.outtakeCommand(intake)
+		// );
 	}
 
 	public Command getAutonomousCommand() {
