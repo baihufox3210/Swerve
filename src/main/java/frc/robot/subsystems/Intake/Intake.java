@@ -3,7 +3,7 @@ package frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Intake.Roller.Roller;
 
-public class Intake extends SubsystemBase{
+public class Intake extends SubsystemBase {
     public static Intake intake;
 
     private final Roller roller = Roller.getInstance();
@@ -15,9 +15,14 @@ public class Intake extends SubsystemBase{
     public void outtake() {
         roller.outtake();
     }
- 
+
+    public void stop() {
+        roller.stop();
+    }
+
     public static Intake getInstance() {
-        if (intake == null) intake = new Intake();
+        if (intake == null)
+            intake = new Intake();
         return intake;
     }
 }
