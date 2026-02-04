@@ -19,9 +19,14 @@ public class Roller {
     public void outtake() {
         rollerModule.setSpeed(RollerConstants.outtakeSpeed);
     }
-    
+
+    public void stop() {
+        rollerModule.setSpeed(0);
+    }
+
     public static Roller getInstance() {
-        if (roller == null)  roller = new Roller();
+        if (roller == null)
+            roller = new Roller();
         return roller;
     }
 }
