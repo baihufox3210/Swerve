@@ -5,10 +5,10 @@ import frc.robot.subsystems.Intake.Intake;
 
 public class IntakeCommands {
     public static Command intakeCommand(Intake intake) {
-        return intake.run(intake::intake).withName("IntakeCommand");
+        return intake.run(intake::intake).finallyDo(intake::stop).withName("IntakeCommand");
     }
 
     public static Command outtakeCommand(Intake intake) {
-        return intake.run(intake::outtake).withName("OuttakeCommand");
+        return intake.run(intake::outtake).finallyDo(intake::stop).withName("OuttakeCommand");
     }
 }
