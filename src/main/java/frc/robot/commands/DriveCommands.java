@@ -30,7 +30,7 @@ public class DriveCommands {
             return ChassisSpeeds.fromFieldRelativeSpeeds(
                 controls.getXSpeed() * DrivetrainConstants.maxSpeed,
                 controls.getYSpeed() * DrivetrainConstants.maxSpeed,
-                controls.getRotSpeed() ,
+                controls.getRotSpeed() * DrivetrainConstants.maxAngularSpeed,
                 rotation
             );
         } else {
