@@ -9,15 +9,15 @@ public class DriverControls {
     private boolean isFieldRelative = false;
 
     public double getXSpeed() {
-        return -joystick.getY();
+        return joystick.getY();
     }
 
     public double getYSpeed() {
-        return -joystick.getX();
+        return joystick.getX();
     }
 
     public double getRotSpeed() {
-        return -joystick.getRawAxis(4);
+        return joystick.getRawAxis(4);
     }
 
     public boolean isFieldRelative() {
@@ -33,10 +33,10 @@ public class DriverControls {
     }
 
     public JoystickButton intakeButton() {
-        return new JoystickButton(joystick, 0);
+        return new JoystickButton(joystick, 1);
     }
 
     public JoystickButton outtakeButton() {
-        return new JoystickButton(joystick, 2);
+        return new JoystickButton(joystick, 3);
     }
 }
