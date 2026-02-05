@@ -24,7 +24,7 @@ public class Gyro extends SubsystemBase {
     }
 
     public double getYaw() {
-        return ahrs.getYaw();
+        return -ahrs.getYaw();
     }
 
     public void reset() {
