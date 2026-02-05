@@ -5,7 +5,6 @@ import frc.robot.subsystems.Intake.Roller.module.RollerModule;
 
 public class Roller {
     private static Roller roller;
-
     private final RollerModule rollerModule;
 
     public Roller() {
