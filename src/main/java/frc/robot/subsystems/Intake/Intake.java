@@ -5,7 +5,7 @@ import frc.robot.subsystems.Intake.Indexer.Indexer;
 import frc.robot.subsystems.Intake.Roller.Roller;
 
 public class Intake extends SubsystemBase {
-    public static Intake intake;
+    private static Intake intake;
 
     private final Roller roller = Roller.getInstance();
     private final Indexer indexer = Indexer.getInstance();
