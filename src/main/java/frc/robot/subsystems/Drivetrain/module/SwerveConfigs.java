@@ -1,6 +1,6 @@
 package frc.robot.subsystems.Drivetrain.module;
 
-import frc.robot.constants.DrivetrainConstants;
+import frc.robot.subsystems.Drivetrain.DrivetrainConstants;
 import frc.robot.utils.SparkMaxConfiguration;
 
 public class SwerveConfigs {

@@ -1,4 +1,4 @@
-package frc.robot.constants;
+package frc.robot;
 
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 

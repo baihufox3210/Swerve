@@ -1,9 +1,9 @@
 package frc.robot.subsystems.Intake.Indexer;
 
-import frc.robot.constants.Intake.IndexerConstants;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Intake.Indexer.module.IndexerModule;
 
-public class Indexer {
+public class Indexer extends SubsystemBase {
     private static Indexer indexer;
     private final IndexerModule indexerModule;
 

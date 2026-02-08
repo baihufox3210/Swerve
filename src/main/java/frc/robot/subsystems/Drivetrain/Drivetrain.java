@@ -16,7 +16,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.LimelightHelpers.PoseEstimate;
-import frc.robot.constants.DrivetrainConstants;
 import frc.robot.subsystems.Drivetrain.module.SwerveModule;
 import frc.robot.subsystems.Gyro.Gyro;
 import frc.robot.subsystems.Limelight.Limelight;
@@ -140,6 +139,15 @@ public class Drivetrain extends SubsystemBase {
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DrivetrainConstants.maxSpeed);
 
         setModuleStates(swerveModuleStates);
+    }
+
+    public ChassisSpeeds getChassisSpeeds(double xSpeed, double ySpeed, double rotSpeed) {
+        return ChassisSpeeds.fromFieldRelativeSpeeds(
+            xSpeed,
+            ySpeed,
+            rotSpeed,
+            gyro.getRotation()
+        );
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {

@@ -3,7 +3,7 @@ package frc.robot.utils;
 import com.revrobotics.spark.FeedbackSensor;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-import frc.robot.constants.RobotConstants;
+import frc.robot.RobotConstants;
 
 public class SparkMaxConfiguration extends SparkMaxConfig {
     public SparkMaxConfiguration(int currentLimit, boolean isInverted) {

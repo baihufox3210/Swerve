@@ -1,9 +1,9 @@
 package frc.robot.subsystems.Intake.Roller;
 
-import frc.robot.constants.Intake.RollerConstants;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.Intake.Roller.module.RollerModule;
 
-public class Roller {
+public class Roller extends SubsystemBase{
     private static Roller roller;
     private final RollerModule rollerModule;
 

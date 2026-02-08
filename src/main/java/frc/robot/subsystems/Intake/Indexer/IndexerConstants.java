@@ -1,4 +1,4 @@
-package frc.robot.constants.Intake;
+package frc.robot.subsystems.Intake.Indexer;
 
 public class IndexerConstants {
     public static final int indexerMotorID = 33;
