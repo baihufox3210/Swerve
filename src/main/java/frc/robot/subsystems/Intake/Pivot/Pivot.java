@@ -37,7 +37,7 @@ public class Pivot extends SubsystemBase {
 
     public enum IntakeState {
         IN(Degrees.of(0)),
-        OUT(Degrees.of(10)),
+        OUT(Degrees.of(360 * 0.3)),
         TRANSLATING(Degrees.of(-1));
 
         private final Angle deg;

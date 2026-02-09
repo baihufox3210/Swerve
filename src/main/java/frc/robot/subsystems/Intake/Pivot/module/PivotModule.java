@@ -3,6 +3,8 @@ package frc.robot.subsystems.Intake.Pivot.module;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import static edu.wpi.first.units.Units.Rotations;
+
 import edu.wpi.first.units.measure.Angle;
 import frc.robot.subsystems.Intake.Pivot.PivotConstants;
 import frc.robot.subsystems.Intake.Pivot.Pivot.IntakeState;
@@ -14,6 +16,7 @@ public class PivotModule {
     public PivotModule(int pivotMotorID) {
         pivotMotor = new TalonFX(pivotMotorID, PivotConstants.bus);
         pivotMotor.getConfigurator().apply(PivotConfigs.pivotConfig());
+        pivotMagic = new MotionMagicVoltage(0);
     }
 
     public Angle getPose() {
@@ -21,6 +24,6 @@ public class PivotModule {
     }
     
     public void setControl(IntakeState state) {
-        pivotMotor.setControl(pivotMagic.withPosition(state.getValue()));
+        pivotMotor.setControl(pivotMagic.withPosition(state.getValue().in(Rotations)));
     }
 }

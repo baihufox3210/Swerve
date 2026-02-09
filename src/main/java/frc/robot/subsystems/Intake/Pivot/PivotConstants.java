@@ -20,10 +20,10 @@ public class PivotConstants {
     public static final Angle tolerance = Degrees.of(.5);
 
     public static final Slot0Configs pivotPID = new Slot0Configs()
-        .withKP(1).withKD(0).withKS(0)
+        .withKP(7).withKD(0).withKS(0)
         .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
 
     public static final MotionMagicConfigs pivotMagic = new MotionMagicConfigs()
-        .withMotionMagicCruiseVelocity(RotationsPerSecond.of(1))
-        .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(1));
+        .withMotionMagicCruiseVelocity(RotationsPerSecond.of(40))
+        .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(9));
 }
