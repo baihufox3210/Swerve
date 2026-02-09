@@ -9,6 +9,7 @@ import frc.robot.subsystems.Drivetrain.Drivetrain;
 import frc.robot.commands.Drivetrain.Drive;
 import frc.robot.commands.Intake.Intake;
 import frc.robot.commands.Intake.Outtake;
+import frc.robot.commands.Shooter.Shooting;
 
 public class RobotContainer {
 	private final DriverControls controls = new DriverControls();
@@ -32,6 +33,7 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 		controls.intakeButton().whileTrue(new Intake());
 		controls.outtakeButton().whileTrue(new Outtake());
+		controls.shootingButton().whileTrue(new Shooting());
 	}
 
 	public Command getAutonomousCommand() {
