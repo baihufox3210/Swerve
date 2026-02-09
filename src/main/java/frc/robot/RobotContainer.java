@@ -31,7 +31,7 @@ public class RobotContainer {
 
 	private void configureButtonBindings() {
 		controls.intakeButton().whileTrue(new Intake());
-		controls.outtakeButton().toggleOnTrue(new Outtake());
+		controls.outtakeButton().whileTrue(new Outtake());
 	}
 
 	public Command getAutonomousCommand() {
