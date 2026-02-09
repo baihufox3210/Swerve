@@ -28,6 +28,10 @@ public class DriverControls {
         return new JoystickButton(joystick, 3);
     }
 
+    public JoystickButton shootingButton() {
+        return new JoystickButton(joystick, 6);
+    }
+
     public static DriverControls getInstance() {
         if (driverControls == null) driverControls = new DriverControls();
         return driverControls;
