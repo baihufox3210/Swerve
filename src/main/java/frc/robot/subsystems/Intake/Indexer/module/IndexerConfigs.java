@@ -4,6 +4,6 @@ import frc.robot.utils.SparkMaxConfiguration;
 
 public class IndexerConfigs {
     public static SparkMaxConfiguration indexerConfig() {
-        return new SparkMaxConfiguration(40, false);
+        return new SparkMaxConfiguration(44, false);
     }
 }

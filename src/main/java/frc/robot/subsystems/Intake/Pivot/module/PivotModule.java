@@ -1,6 +1,7 @@
 package frc.robot.subsystems.Intake.Pivot.module;
 
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
+import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import static edu.wpi.first.units.Units.Rotations;
@@ -12,6 +13,7 @@ import frc.robot.subsystems.Intake.Pivot.Pivot.IntakeState;
 public class PivotModule {
     private final TalonFX pivotMotor;
     private MotionMagicVoltage pivotMagic;
+    private NeutralOut neutralOut = new NeutralOut();
 
     public PivotModule(int pivotMotorID) {
         pivotMotor = new TalonFX(pivotMotorID, PivotConstants.bus);
@@ -25,5 +27,9 @@ public class PivotModule {
     
     public void setControl(IntakeState state) {
         pivotMotor.setControl(pivotMagic.withPosition(state.getValue().in(Rotations)));
+    }
+
+    public void stop() {
+        pivotMotor.setControl(neutralOut);
     }
 }

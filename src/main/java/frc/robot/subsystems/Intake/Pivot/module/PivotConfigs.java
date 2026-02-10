@@ -21,7 +21,7 @@ public class PivotConfigs {
 
         config.CurrentLimits
             .withStatorCurrentLimit(Amps.of(30))
-            .withSupplyCurrentLimit(Amps.of(40));
+            .withSupplyCurrentLimit(Amps.of(44));
 
         config.withSlot0(PivotConstants.pivotPID);
         config.withMotionMagic(PivotConstants.pivotMagic);

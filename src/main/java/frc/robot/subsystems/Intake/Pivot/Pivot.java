@@ -30,14 +30,18 @@ public class Pivot extends SubsystemBase {
         return pivotModule.getPose().isNear(state.getValue(), PivotConstants.tolerance);
     }
 
+    public void stop() {
+        pivotModule.stop();
+    }
+
     public static Pivot getInstance() {
-        if (pivot == null)  pivot = new Pivot();
+        if (pivot == null) pivot = new Pivot();
         return pivot;
     }
 
     public enum IntakeState {
         IN(Degrees.of(0)),
-        OUT(Degrees.of(360 * 0.3)),
+        OUT(Degrees.of(90)),
         TRANSLATING(Degrees.of(-1));
 
         private final Angle deg;
@@ -47,7 +51,7 @@ public class Pivot extends SubsystemBase {
         }
 
         public Angle getValue() {
-            return deg;
+            return deg; 
         }
     }
 }

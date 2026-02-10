@@ -16,11 +16,11 @@ public class PivotConstants {
 
     public static final int pivotMotorID = 32;
 
-    public static final double GearRatio = 4;
+    public static final double GearRatio = 2.5;
     public static final Angle tolerance = Degrees.of(.5);
 
     public static final Slot0Configs pivotPID = new Slot0Configs()
-        .withKP(7).withKD(0).withKS(0)
+        .withKP(7.5).withKD(0).withKS(0)
         .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
 
     public static final MotionMagicConfigs pivotMagic = new MotionMagicConfigs()

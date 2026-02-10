@@ -4,6 +4,6 @@ import frc.robot.utils.SparkMaxConfiguration;
 
 public class RollerConfigs {
     public static SparkMaxConfiguration rollerConfig() {
-        return new SparkMaxConfiguration(40, true);
+        return new SparkMaxConfiguration(44, true);
     }
 }
