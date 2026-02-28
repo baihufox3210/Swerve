@@ -9,14 +9,14 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import frc.robot.hardware.Factory.GyroFactory.GyroType;
-import frc.robot.hardware.Factory.MotorFactory.MotorType;
+import frc.robot.hardware.Factory.GyroFactory.GyroModel;
+import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 
 public class DrivetrainConstants {
-    public static final MotorType driveMotorType = MotorType.SPARKMAX;
-    public static final MotorType turningMotorType = MotorType.SPARKMAX;
+    public static final MotorModel driveMotorType = MotorModel.SPARKMAX;
+    public static final MotorModel turningMotorType = MotorModel.SPARKMAX;
 
-    public static final GyroType gyroType = GyroType.PIGEON;
+    public static final GyroModel gyroType = GyroModel.PIGEON;
 
     public static final int[] driveMotorIDs = {11, 12, 13, 14};
     public static final int[] turningMotorIDs = {21, 22, 23, 24};

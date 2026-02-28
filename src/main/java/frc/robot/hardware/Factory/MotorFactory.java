@@ -6,12 +6,12 @@ import frc.robot.hardware.Motor.TalonFX.TalonFXMotor;
 import frc.robot.hardware.interfaces.GenericMotor;
 
 public class MotorFactory {
-    public static enum MotorType {
+    public static enum MotorModel {
         SPARKMAX, SPARKFLEX, TALONFX
     }
 
-    public static GenericMotor createMotor(int motorID, MotorType motorType) {
-        switch (motorType) {
+    public static GenericMotor createMotor(int motorID, MotorModel motorModel) {
+        switch (motorModel) {
             case SPARKMAX:
                 return new SparkMaxMotor(motorID);
 
@@ -22,7 +22,7 @@ public class MotorFactory {
                 return new TalonFXMotor(motorID);
 
             default:
-                throw new IllegalArgumentException("Unsupported motor type: " + motorType);
+                throw new IllegalArgumentException("Unsupported motor type: " + motorModel);
         }
     }
 }
