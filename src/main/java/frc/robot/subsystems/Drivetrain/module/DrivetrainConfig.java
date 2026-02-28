@@ -29,8 +29,6 @@ public class DrivetrainConfig {
 
     public static MotorConfig getTurningMotorConfig(double angleOffset) {
         turningMotorConfig = new MotorConfig();
-
-        turningMotorConfig.setSupplyCurrentLimit(TurningMotorConfig.SupplyCurrentLimit);
         
         turningMotorConfig.setEncoderConversion(
             TurningMotorConfig.PositionConversionFactor,

@@ -2,10 +2,7 @@ package frc.robot.hardware.config;
 
 import com.revrobotics.spark.FeedbackSensor;
 
-public class MotorConfig {
-    public int statorCurrentLimit = 30;
-    public int supplyCurrentLimit = 40;
-    
+public class MotorConfig {   
     public double voltageCompensation = 12.0;
     
     public double kP = 0.0;
@@ -34,16 +31,6 @@ public class MotorConfig {
     public PositionWrap positionWrap = null;
 
     public MotorConfig() {}
-
-    public MotorConfig setStatorCurrentLimit(int amps) {
-        this.statorCurrentLimit = amps;
-        return this;
-    }
-
-    public MotorConfig setSupplyCurrentLimit(int amps) {
-        this.supplyCurrentLimit = amps;
-        return this;
-    }
 
     public MotorConfig setInverted(boolean inverted) {
         this.inverted = inverted;

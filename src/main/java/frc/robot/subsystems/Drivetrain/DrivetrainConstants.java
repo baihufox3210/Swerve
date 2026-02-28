@@ -13,8 +13,8 @@ import frc.robot.hardware.Factory.GyroFactory.GyroModel;
 import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 
 public class DrivetrainConstants {
-    public static final MotorModel driveMotorModel = MotorModel.SPARKMAX;
-    public static final MotorModel turningMotorModel = MotorModel.SPARKMAX;
+    public static final MotorModel driveMotorModel = MotorModel.Neo;
+    public static final MotorModel turningMotorModel = MotorModel.Neo550;
 
     public static final GyroModel gyroModel = GyroModel.PIGEON;
 

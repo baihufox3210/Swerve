@@ -16,12 +16,15 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 import frc.robot.hardware.Motor.TalonFX.Encoder.TalonFXRelativeEncoder;
 import frc.robot.hardware.config.MotorConfig;
 import frc.robot.hardware.interfaces.GenericEncoder;
 import frc.robot.hardware.interfaces.GenericMotor;
 
 public class TalonFXMotor implements GenericMotor {
+    private final MotorModel motorModel;
+
     private final TalonFX motor;
 
     private final MotionMagicVoltage motionMagic;
@@ -29,8 +32,11 @@ public class TalonFXMotor implements GenericMotor {
 
     private final NeutralOut neutralOut = new NeutralOut();
 
-    public TalonFXMotor(int motorID) {
+    public TalonFXMotor(int motorID, MotorModel motorModel) {
+        this.motorModel = motorModel;
+
         motor = new TalonFX(motorID);
+
         motionMagic = new MotionMagicVoltage(0);
         motionMagicVelocity = new MotionMagicVelocityVoltage(0);
     }
@@ -47,8 +53,8 @@ public class TalonFXMotor implements GenericMotor {
         config.Feedback.withSensorToMechanismRatio(motorConfigs.positionConversionFactor);
 
         config.CurrentLimits
-            .withStatorCurrentLimit(motorConfigs.statorCurrentLimit)
-            .withSupplyCurrentLimit(motorConfigs.supplyCurrentLimit);
+            .withStatorCurrentLimit(motorModel.statorCurrentLimit)
+            .withSupplyCurrentLimit(motorModel.supplyCurrentLimit);
 
         config.withSlot0(
             new Slot0Configs()

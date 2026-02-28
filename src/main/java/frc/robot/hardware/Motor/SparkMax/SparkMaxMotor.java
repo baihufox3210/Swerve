@@ -10,6 +10,7 @@ import com.revrobotics.spark.config.MAXMotionConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 import frc.robot.hardware.Motor.SparkMax.Encoder.SparkMaxAbsoluteEncoder;
 import frc.robot.hardware.Motor.SparkMax.Encoder.SparkMaxRelativeEncoder;
 import frc.robot.hardware.config.MotorConfig;
@@ -17,10 +18,14 @@ import frc.robot.hardware.interfaces.GenericEncoder;
 import frc.robot.hardware.interfaces.GenericMotor;
 
 public class SparkMaxMotor implements GenericMotor {
+    private final MotorModel motorModel;
+
     private final SparkMax motor;
     private final SparkClosedLoopController closedLoopController;
     
-    public SparkMaxMotor(int motorID) {
+    public SparkMaxMotor(int motorID, MotorModel motorModel) {
+        this.motorModel = motorModel;
+
         motor = new SparkMax(motorID, MotorType.kBrushless);
         closedLoopController = motor.getClosedLoopController();
     }
@@ -34,7 +39,9 @@ public class SparkMaxMotor implements GenericMotor {
 
         config.inverted(motorConfig.inverted);
 
-        config.smartCurrentLimit(motorConfig.supplyCurrentLimit);
+        config.smartCurrentLimit(motorModel.statorCurrentLimit);
+        config.secondaryCurrentLimit(motorModel.supplyCurrentLimit);
+        
         config.voltageCompensation(motorConfig.voltageCompensation);
 
         motionConfig.cruiseVelocity(motorConfig.cruiseVelocity);
