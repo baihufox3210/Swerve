@@ -20,7 +20,7 @@ public class Drivetrain extends SubsystemBase {
     private final SwerveDrivePoseEstimator poseEstimator;
 
     private Drivetrain() {
-        gyro = GyroFactory.createGyro(DrivetrainConstants.gyroType, DrivetrainConstants.gyroID);
+        gyro = GyroFactory.createGyro(DrivetrainConstants.gyroModel, DrivetrainConstants.gyroID);
 
         swerveModules = new SwerveModule[4];
         for (int i = 0; i < 4; i++) {

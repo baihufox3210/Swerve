@@ -13,10 +13,10 @@ import frc.robot.hardware.Factory.GyroFactory.GyroModel;
 import frc.robot.hardware.Factory.MotorFactory.MotorModel;
 
 public class DrivetrainConstants {
-    public static final MotorModel driveMotorType = MotorModel.SPARKMAX;
-    public static final MotorModel turningMotorType = MotorModel.SPARKMAX;
+    public static final MotorModel driveMotorModel = MotorModel.SPARKMAX;
+    public static final MotorModel turningMotorModel = MotorModel.SPARKMAX;
 
-    public static final GyroModel gyroType = GyroModel.PIGEON;
+    public static final GyroModel gyroModel = GyroModel.PIGEON;
 
     public static final int[] driveMotorIDs = {11, 12, 13, 14};
     public static final int[] turningMotorIDs = {21, 22, 23, 24};
