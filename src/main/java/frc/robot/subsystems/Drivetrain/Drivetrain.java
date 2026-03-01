@@ -63,6 +63,10 @@ public class Drivetrain extends SubsystemBase {
         return poseEstimator.getEstimatedPosition();
     }
 
+    public void resetPose() {
+        poseEstimator.resetPosition(gyro.getRotation2d(), getModulePositions(), getPose());
+    }
+
     private SwerveModulePosition[] getModulePositions() {
         SwerveModulePosition[] positions = new SwerveModulePosition[4];
         for (int i = 0; i < 4; i++) positions[i] = swerveModules[i].getPosition();
