@@ -18,14 +18,14 @@ public class SwerveModule {
     private SwerveModuleState desiredState;
 
     public SwerveModule(int driveMotorID, int turningMotorID, double angleOffset) {
-        driveMotor = MotorFactory.createMotor(driveMotorID, DrivetrainConstants.driveMotorModel);
-        turningMotor = MotorFactory.createMotor(turningMotorID, DrivetrainConstants.turningMotorModel);
+        driveMotor = MotorFactory.createMotor(driveMotorID, DrivetrainConstants.driveMotorModel, DrivetrainConfig.getDriveMotorConfig());
+        turningMotor = MotorFactory.createMotor(turningMotorID, DrivetrainConstants.turningMotorModel, DrivetrainConfig.getTurningMotorConfig(angleOffset));
 
         driveEncoder = driveMotor.getEncoder();
         turningEncoder = turningMotor.getAbsoluteEncoder();
 
-        driveMotor.configure(DrivetrainConfig.getDriveMotorConfig());
-        turningMotor.configure(DrivetrainConfig.getTurningMotorConfig(angleOffset));
+        driveMotor.configure();
+        turningMotor.configure();
 
         desiredState = new SwerveModuleState();
         desiredState.angle = new Rotation2d(turningEncoder.getPosition());

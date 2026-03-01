@@ -19,19 +19,21 @@ import frc.robot.hardware.interfaces.GenericMotor;
 
 public class SparkFlexMotor implements GenericMotor {
     private final MotorModel motorModel;
+    private final MotorConfig motorConfig;
 
     private final SparkFlex motor;
     private final SparkClosedLoopController closedLoopController;
     
-    public SparkFlexMotor(int motorID, MotorModel motorModel) {
+    public SparkFlexMotor(int motorID, MotorModel motorModel, MotorConfig motorConfig) {
         this.motorModel = motorModel;
+        this.motorConfig = motorConfig;
         
         motor = new SparkFlex(motorID, MotorType.kBrushless);
         closedLoopController = motor.getClosedLoopController();
     }
 
     @Override
-    public void configure(MotorConfig motorConfig) {
+    public void configure() {
         SparkFlexConfig config = new SparkFlexConfig();
         MAXMotionConfig motionConfig = new MAXMotionConfig();
 

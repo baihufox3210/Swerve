@@ -24,6 +24,7 @@ import frc.robot.hardware.interfaces.GenericMotor;
 
 public class TalonFXMotor implements GenericMotor {
     private final MotorModel motorModel;
+    private final MotorConfig motorConfig;
 
     private final TalonFX motor;
 
@@ -32,8 +33,9 @@ public class TalonFXMotor implements GenericMotor {
 
     private final NeutralOut neutralOut = new NeutralOut();
 
-    public TalonFXMotor(int motorID, MotorModel motorModel) {
+    public TalonFXMotor(int motorID, MotorModel motorModel, MotorConfig motorConfig) {
         this.motorModel = motorModel;
+        this.motorConfig = motorConfig;
 
         motor = new TalonFX(motorID);
 
@@ -42,15 +44,15 @@ public class TalonFXMotor implements GenericMotor {
     }
 
     @Override
-    public void configure(MotorConfig motorConfigs) {
+    public void configure() {
         TalonFXConfiguration config = new TalonFXConfiguration();
 
         config.MotorOutput.withNeutralMode(NeutralModeValue.Brake);
 
-        if (motorConfigs.inverted) config.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
+        if (motorConfig.inverted) config.MotorOutput.withInverted(InvertedValue.Clockwise_Positive);
         else config.MotorOutput.withInverted(InvertedValue.CounterClockwise_Positive);
 
-        config.Feedback.withSensorToMechanismRatio(motorConfigs.positionConversionFactor);
+        config.Feedback.withSensorToMechanismRatio(motorConfig.positionConversionFactor);
 
         config.CurrentLimits
             .withStatorCurrentLimit(motorModel.statorCurrentLimit)
@@ -58,15 +60,15 @@ public class TalonFXMotor implements GenericMotor {
 
         config.withSlot0(
             new Slot0Configs()
-                .withKP(motorConfigs.kP).withKI(motorConfigs.kI).withKD(motorConfigs.kD)
-                .withKS(motorConfigs.kS).withKV(motorConfigs.kV).withKA(motorConfigs.kA)
+                .withKP(motorConfig.kP).withKI(motorConfig.kI).withKD(motorConfig.kD)
+                .withKS(motorConfig.kS).withKV(motorConfig.kV).withKA(motorConfig.kA)
                 .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign)
         );
 
         config.withMotionMagic(
             new MotionMagicConfigs()
-                .withMotionMagicCruiseVelocity(RotationsPerSecond.of(motorConfigs.cruiseVelocity))
-                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(motorConfigs.maxAcceleration))
+                .withMotionMagicCruiseVelocity(RotationsPerSecond.of(motorConfig.cruiseVelocity))
+                .withMotionMagicAcceleration(RotationsPerSecondPerSecond.of(motorConfig.maxAcceleration))
         );
 
         motor.getConfigurator().apply(config);

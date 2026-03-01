@@ -1,9 +1,7 @@
 package frc.robot.hardware.interfaces;
 
-import frc.robot.hardware.config.MotorConfig;
-
 public interface GenericMotor {
-    void configure(MotorConfig configs);
+    void configure();
     
     void set(double speed);
     void setVelocity(double speed);

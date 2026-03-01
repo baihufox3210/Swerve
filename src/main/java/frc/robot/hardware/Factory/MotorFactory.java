@@ -3,6 +3,7 @@ package frc.robot.hardware.Factory;
 import frc.robot.hardware.Motor.SparkFlex.SparkFlexMotor;
 import frc.robot.hardware.Motor.SparkMax.SparkMaxMotor;
 import frc.robot.hardware.Motor.TalonFX.TalonFXMotor;
+import frc.robot.hardware.config.MotorConfig;
 import frc.robot.hardware.interfaces.GenericMotor;
 
 public class MotorFactory {
@@ -21,11 +22,11 @@ public class MotorFactory {
         }
     }
 
-    public static GenericMotor createMotor(int motorID, MotorModel motorModel) {
+    public static GenericMotor createMotor(int motorID, MotorModel motorModel, MotorConfig motorConfig) {
         return switch (motorModel) {
-            case Neo, Neo550 -> new SparkMaxMotor(motorID, motorModel);
-            case NeoVortex -> new SparkFlexMotor(motorID, motorModel);
-            case KrakenX60 -> new TalonFXMotor(motorID, motorModel);
+            case Neo, Neo550 -> new SparkMaxMotor(motorID, motorModel, motorConfig);
+            case NeoVortex -> new SparkFlexMotor(motorID, motorModel, motorConfig);
+            case KrakenX60 -> new TalonFXMotor(motorID, motorModel, motorConfig);
             default -> throw new IllegalArgumentException("Unknown motor model: " + motorModel);
         };
     }
