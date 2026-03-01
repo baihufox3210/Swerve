@@ -22,21 +22,11 @@ public class MotorFactory {
     }
 
     public static GenericMotor createMotor(int motorID, MotorModel motorModel) {
-        switch (motorModel) {
-            case Neo:
-                return new SparkMaxMotor(motorID, motorModel);
-
-            case Neo550:
-                return new SparkMaxMotor(motorID, motorModel);
-
-            case NeoVortex:
-                return new SparkFlexMotor(motorID, motorModel);
-
-            case KrakenX60:
-                return new TalonFXMotor(motorID, motorModel);
-
-            default:
-                throw new IllegalArgumentException("Unsupported motor type: " + motorModel);
-        }
+        return switch (motorModel) {
+            case Neo, Neo550 -> new SparkMaxMotor(motorID, motorModel);
+            case NeoVortex -> new SparkFlexMotor(motorID, motorModel);
+            case KrakenX60 -> new TalonFXMotor(motorID, motorModel);
+            default -> throw new IllegalArgumentException("Unknown motor model: " + motorModel);
+        };
     }
 }
