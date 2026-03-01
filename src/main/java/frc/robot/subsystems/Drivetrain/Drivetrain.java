@@ -1,5 +1,10 @@
 package frc.robot.subsystems.Drivetrain;
 
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -8,6 +13,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.networktables.StructPublisher;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.hardware.Factory.GyroFactory;
 import frc.robot.hardware.interfaces.GenericGyro;
@@ -44,8 +50,10 @@ public class Drivetrain extends SubsystemBase {
             DrivetrainConstants.InitialPose
         );
 
-        gyro.reset();
+        configurePathPlanner();
 
+        gyro.reset();
+        
         publisherField = NetworkTableInstance.getDefault().getStructTopic("Field", Pose2d.struct).publish();
     }
 
@@ -63,8 +71,8 @@ public class Drivetrain extends SubsystemBase {
         return poseEstimator.getEstimatedPosition();
     }
 
-    public void resetPose() {
-        poseEstimator.resetPosition(gyro.getRotation2d(), getModulePositions(), getPose());
+    public void resetPose(Pose2d pose) {
+        poseEstimator.resetPosition(gyro.getRotation2d(), getModulePositions(), pose);
     }
 
     private SwerveModulePosition[] getModulePositions() {
@@ -92,9 +100,45 @@ public class Drivetrain extends SubsystemBase {
 
         setSwerveModuleStates(swerveModuleStates);
     }
+    
+    public ChassisSpeeds getRobotSpeeds() {
+        return DrivetrainConstants.kinematics.toChassisSpeeds(getModuleStates());
+    }
+
+    public SwerveModuleState[] getModuleStates() {
+        SwerveModuleState[] states = new SwerveModuleState[4];
+        for (int i = 0; i < 4; i++) states[i] = swerveModules[i].getState();
+        return states;
+    }
 
     private void setSwerveModuleStates(SwerveModuleState[] desiredStates) {
         for (int i = 0; i < 4; i++) swerveModules[i].setDesiredState(desiredStates[i]);
+    }
+
+    private void configurePathPlanner() {
+        try {
+            AutoBuilder.configure(
+                this::getPose,
+                this::resetPose,
+                this::getRobotSpeeds,
+                (speeds, feedforwards) -> drive(speeds),
+                new PPHolonomicDriveController(
+                    new PIDConstants(2.0, 0.0, 0.0),
+                    new PIDConstants(2.0, 0.0, 0.0)
+                ),
+                RobotConfig.fromGUISettings(),
+                () -> {
+                    var alliance = DriverStation.getAlliance();
+                    if (alliance.isPresent()) return alliance.get() == DriverStation.Alliance.Red;
+                    return false;
+                },
+                this
+            );
+            
+        } 
+        catch(Exception e) {
+            DriverStation.reportError("Failed to load PathPlanner: " + e.getMessage(), e.getStackTrace());
+        }
     }
 
     public void stop() {
