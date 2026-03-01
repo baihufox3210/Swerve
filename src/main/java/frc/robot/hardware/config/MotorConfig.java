@@ -24,6 +24,9 @@ public class MotorConfig {
     public double maxAcceleration = 2.0;
     public double allowedProfileError = 0.07;
 
+    public double GearRatio = 1.0;
+    public double MOI = 0.001;
+
     public FeedbackSensor feedbackSensorType = FeedbackSensor.kPrimaryEncoder;
 
     public record PositionWrap(double min, double max) {}
@@ -90,6 +93,16 @@ public class MotorConfig {
     public MotorConfig setEncoderConversion(double positionConversionFactor, double velocityConversionFactor) {
         this.positionConversionFactor = positionConversionFactor;
         this.velocityConversionFactor = velocityConversionFactor;
+        return this;
+    }
+
+    public MotorConfig setGearRatio(double GearRatio) {
+        this.GearRatio = GearRatio;
+        return this;
+    }
+
+    public MotorConfig setMOI(double MOI) {
+        this.MOI = MOI;
         return this;
     }
 }
