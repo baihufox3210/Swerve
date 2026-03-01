@@ -1,6 +1,5 @@
 package frc.robot.subsystems.Drivetrain.module;
 
-import edu.wpi.first.math.system.plant.LinearSystemId;
 import frc.robot.hardware.config.MotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.TurningMotorConfig;
