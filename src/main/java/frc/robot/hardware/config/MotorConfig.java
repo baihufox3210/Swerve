@@ -25,7 +25,7 @@ public class MotorConfig {
     public double allowedProfileError = 0.07;
 
     public double GearRatio = 1.0;
-    public double MOI = 0.001;
+    public double inertia = 0.001;
 
     public FeedbackSensor feedbackSensorType = FeedbackSensor.kPrimaryEncoder;
 
@@ -101,8 +101,8 @@ public class MotorConfig {
         return this;
     }
 
-    public MotorConfig setMOI(double MOI) {
-        this.MOI = MOI;
+    public MotorConfig setinertia(double inertia) {
+        this.inertia = inertia;
         return this;
     }
 }

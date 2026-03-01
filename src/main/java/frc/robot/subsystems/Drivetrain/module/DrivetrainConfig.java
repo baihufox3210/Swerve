@@ -1,5 +1,6 @@
 package frc.robot.subsystems.Drivetrain.module;
 
+import edu.wpi.first.math.system.plant.LinearSystemId;
 import frc.robot.hardware.config.MotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.TurningMotorConfig;
@@ -10,6 +11,9 @@ public class DrivetrainConfig {
 
     public static MotorConfig getDriveMotorConfig() {
         driveMotorConfig = new MotorConfig();
+
+        driveMotorConfig.setGearRatio(DriveMotorConfig.GearRatio);
+        driveMotorConfig.setinertia(0.025);
 
         driveMotorConfig.setEncoderConversion(
             DriveMotorConfig.PositionConversionFactor,
@@ -29,6 +33,8 @@ public class DrivetrainConfig {
 
     public static MotorConfig getTurningMotorConfig(double angleOffset) {
         turningMotorConfig = new MotorConfig();
+
+        turningMotorConfig.setGearRatio(TurningMotorConfig.GearRatio);
         
         turningMotorConfig.setEncoderConversion(
             TurningMotorConfig.PositionConversionFactor,
