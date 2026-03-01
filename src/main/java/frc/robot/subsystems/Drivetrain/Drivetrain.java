@@ -2,7 +2,6 @@ package frc.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -24,16 +23,9 @@ public class Drivetrain extends SubsystemBase {
 
     private final SwerveDrivePoseEstimator poseEstimator;
 
-    private final Pose2d field2d;
-    private final Pose3d field3d;
-
-    private final StructPublisher<Pose2d> publisherField2d;
-    private final StructPublisher<Pose3d> publisherField3d;
+    private final StructPublisher<Pose2d> publisherField;
 
     private Drivetrain() {
-        field2d = new Pose2d();
-        field3d = new Pose3d();
-
         gyro = GyroFactory.createGyro(DrivetrainConstants.gyroModel, DrivetrainConstants.gyroID);
 
         swerveModules = new SwerveModule[4];
@@ -54,8 +46,7 @@ public class Drivetrain extends SubsystemBase {
 
         gyro.reset();
 
-        publisherField2d = NetworkTableInstance.getDefault().getStructTopic("Field2d", Pose2d.struct).publish();
-        publisherField3d = NetworkTableInstance.getDefault().getStructTopic("Field3d", Pose3d.struct).publish();
+        publisherField = NetworkTableInstance.getDefault().getStructTopic("Field", Pose2d.struct).publish();
     }
 
     @Override
@@ -65,8 +56,11 @@ public class Drivetrain extends SubsystemBase {
             getModulePositions()
         );
 
-        publisherField2d.set(field2d);
-        publisherField3d.set(field3d);
+        publisherField.set(getPose());
+    }
+
+    public Pose2d getPose() {
+        return poseEstimator.getEstimatedPosition();
     }
 
     private SwerveModulePosition[] getModulePositions() {
