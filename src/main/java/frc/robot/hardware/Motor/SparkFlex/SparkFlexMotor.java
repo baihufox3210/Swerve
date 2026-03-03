@@ -6,6 +6,7 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.FeedForwardConfig;
 import com.revrobotics.spark.config.MAXMotionConfig;
 import com.revrobotics.spark.config.SparkFlexConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
@@ -61,11 +62,8 @@ public class SparkFlexMotor implements GenericMotor {
             .inverted(motorConfig.encoderInverted);
 
         config.closedLoop
-            .pid(motorConfig.kP, motorConfig.kI, motorConfig.kD);
-            // .feedForward
-            //     .kS(motorConfig.kS)
-            //     .kV(motorConfig.kV)
-            //     .kA(motorConfig.kA);
+            .pid(motorConfig.kP, motorConfig.kI, motorConfig.kD)
+            .apply(new FeedForwardConfig().kS(motorConfig.kS).kV(motorConfig.kV).kA(motorConfig.kA));
         
         config.closedLoop.feedbackSensor(motorConfig.feedbackSensorType);
         config.closedLoop.apply(motionConfig);
