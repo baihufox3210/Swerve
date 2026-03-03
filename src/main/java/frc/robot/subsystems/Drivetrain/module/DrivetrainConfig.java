@@ -5,11 +5,8 @@ import frc.robot.subsystems.Drivetrain.DrivetrainConstants.DriveMotorConfig;
 import frc.robot.subsystems.Drivetrain.DrivetrainConstants.TurningMotorConfig;
 
 public class DrivetrainConfig {
-    private static MotorConfig driveMotorConfig;
-    private static MotorConfig turningMotorConfig;
-
     public static MotorConfig getDriveMotorConfig() {
-        driveMotorConfig = new MotorConfig();
+        MotorConfig driveMotorConfig = new MotorConfig();
 
         driveMotorConfig.setGearRatio(DriveMotorConfig.GearRatio);
         driveMotorConfig.setinertia(0.025);
@@ -31,7 +28,7 @@ public class DrivetrainConfig {
     }
 
     public static MotorConfig getTurningMotorConfig(double angleOffset) {
-        turningMotorConfig = new MotorConfig();
+        MotorConfig turningMotorConfig = new MotorConfig();
 
         turningMotorConfig.setGearRatio(TurningMotorConfig.GearRatio);
         
